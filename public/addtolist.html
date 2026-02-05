@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add to List</title>
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
         <h1>Add New Entry to List</h1>
         
-        <form class="entry-form">
+        <form id="entryForm" class="entry-form">
             <div class="form-group">
                 <label for="gameName">Game Name:</label>
                 <input type="text" id="gameName" name="gameName" required>
@@ -25,8 +24,42 @@
         </form>
         
         <div class="links">
-            <a href="/" class="btn">Back to Home</a>
+            <a href="/">Back to Home</a>
         </div>
     </div>
+
+    <script>
+        document.getElementById("entryForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const gameName = document.getElementById("gameName").value;
+            const ranking = document.getElementById("ranking").value;
+            
+            try {
+                const response = await fetch("/api/games", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        gameName: gameName,
+                        ranking: ranking,
+                    }),
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(result.message);
+                    window.location.href = "/";
+                } else {
+                    alert("Error: " + result.error);
+                }
+            } catch (error) {
+                console.error("Error adding game:", error);
+                alert("Error adding game");
+            }
+        });
+    </script>
 </body>
 </html>

@@ -4,25 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top Ten List</title>
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
         <h1>Tom's Favorite Video Games</h1>
         
-        <h2>Top 10 Video Games I Played in 2025 (But they didn't necessarily all come out in 2025)</h2>
-        <ol>
-            <li>Project Silverfish</li>
-            <li>Silent Hill f</li>
-            <li>Look Outside</li>
-            <li>Hollow Knight: Silksong</li>
-            <li>Persona 2: Innocent Sin\Eternal Punishment</li>
-            <li>Demon's Souls (PS3)</li>
-            <li>Max Payne 3</li>
-            <li>Nine Sols</li>
-            <li>Chulip</li>
-            <li>Clair Obscur Expedition 33</li>
+        <h2>Top 10 Video Games I Played in 2025 (That didn't necessarily come out in 2025)</h2>
+        
+        <ol id="gamesList">
+            <li>Loading games...</li>
         </ol>
+
+        <p id="status"></p>
         
         <p class="description">
             I chose to do a top ten list of games I played in 2025 because I think it was a 
@@ -33,9 +26,10 @@
         </p>
         
         <div class="links">
-            <a href="addtolist.html" class="btn">Add to List</a>
-            <a href="login.html" class="btn">Secure Login</a>
+            <a href="/addtolist">Add to List</a>
         </div>
     </div>
+
+    <script src="js/fetchgames.js"></script>
 </body>
 </html>
