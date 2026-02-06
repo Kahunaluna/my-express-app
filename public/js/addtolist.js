@@ -1,5 +1,18 @@
 const form = document.getElementById("entryForm");
 
+async function checkAuth() {
+    try {
+        const res = await fetch("/api/auth/check");
+        const data = await res.json();
+        if (!data.authenticated) {
+            alert("Please log in to add games");
+            window.location.href = "/login.html";
+        }
+    } catch (err) {
+        console.error("Auth check failed:", err);
+    }
+}
+
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -20,9 +33,12 @@ form.addEventListener("submit", async (e) => {
 
         const result = await response.json();
 
-        if (result.success) {
+        if (response.ok && result.success) {
             alert(result.message);
             window.location.href = "/";
+        } else if (response.status === 401) {
+            alert("Please log in to add games");
+            window.location.href = "/login.html";
         } else {
             alert("Error: " + result.error);
         }
@@ -31,3 +47,5 @@ form.addEventListener("submit", async (e) => {
         alert("Error adding game");
     }
 });
+
+checkAuth();
